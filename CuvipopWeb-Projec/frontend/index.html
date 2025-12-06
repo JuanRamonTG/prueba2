@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuvipop • Helados y Snacks</title>
+
+    <!-- Bootstrap -->
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+        rel="stylesheet">
+    
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lilita+One&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #FF7BAC;
+            --secondary: #7AD7F0;
+            --accent: #FFD166;
+            --light: #FFF9F2;
+            --dark: #333333;
+        }
+        
+        body {
+            background-color: var(--light);
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            font-family: 'Lilita One', cursive;
+            font-size: 1.8rem;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+        
+        .navbar-brand span {
+            color: var(--secondary);
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark) !important;
+            margin: 0 8px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary) !important;
+        }
+        
+        .cart-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white !important;
+            border-radius: 50px;
+            padding: 8px 20px !important;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(255, 122, 172, 0.3);
+        }
+        
+        .cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 122, 172, 0.4);
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, rgba(255, 122, 172, 0.9), rgba(122, 215, 240, 0.9)),
+                        url("https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80");
+            background-size: cover;
+            background-position: center;
+            padding: 150px 20px;
+            text-align: center;
+            border-radius: 25px;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        .hero h1 {
+            font-family: 'Lilita One', cursive;
+            font-weight: 700;
+            font-size: 3.5rem;
+            color: white;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: white;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .order-btn {
+            background-color: white;
+            color: var(--primary);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 35px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        
+        .order-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            color: var(--primary);
+        }
+
+        /* CATEGORÍAS */
+        .section-title {
+            font-family: 'Lilita One', cursive;
+            color: var(--primary);
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .cat-card {
+            border: none;
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s;
+            height: 100%;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+        }
+
+        .cat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .cat-img {
+            height: 200px;
+            object-fit: cover;
+            transition: all 0.5s;
+        }
+        
+        .cat-card:hover .cat-img {
+            transform: scale(1.05);
+        }
+        
+        .cat-content {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .cat-title {
+            font-family: 'Lilita One', cursive;
+            color: var(--dark);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .cat-desc {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        
+        .cat-btn {
+            background-color: var(--light);
+            color: var(--primary);
+            border: none;
+            border-radius: 50px;
+            padding: 6px 20px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .cat-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* PROMOCIONES */
+        .promo {
+            background: linear-gradient(135deg, var(--accent), #FFB347);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            color: var(--dark);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(255, 209, 102, 0.3);
+        }
+        
+        .promo::before {
+            content: "🔥";
+            position: absolute;
+            font-size: 3rem;
+            top: 10px;
+            left: 20px;
+            opacity: 0.3;
+        }
+        
+        .promo::after {
+            content: "🔥";
+            position: absolute;
+            font-size: 3rem;
+            bottom: 10px;
+            right: 20px;
+            opacity: 0.3;
+        }
+
+        .promo-title {
+            font-family: 'Lilita One', cursive;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .promo-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+        
+        .promo-btn {
+            background-color: var(--dark);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .promo-btn:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(135deg, var(--secondary), #5BCBFF);
+            padding: 50px 0 20px;
+            margin-top: 80px;
+            color: white;
+            border-radius: 30px 30px 0 0;
+        }
+        
+        .footer-logo {
+            font-family: 'Lilita One', cursive;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-links h5 {
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 20px;
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .promo {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#"><span>Cuvi</span>pop</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="nav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item"><a class="nav-link" href="menu.html">Menú</a></li>
+                <li class="nav-item"><a class="nav-link" href="carrito.html">Carrito</a></li>
+                <li class="nav-item"><a class="nav-link" href="/static/login.html">Iniciar sesión</a></li>
+                <li class="nav-item ms-2"></li>
+                    <a class="btn btn-light px-3 d-flex align-items-center" href="carrito.html" aria-label="Carrito">🛒
+                        <span id="cart-count" style="display:none; min-width:20px; height:20px; line-height:20px; margin-left:8px; background:#FF7BAC; color:white; border-radius:50%; text-align:center; font-size:0.85rem; padding:0 6px;">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="container">
+    <div class="hero">
+        <h1>¡Los mejores helados y snacks!</h1>
+        <p class="lead">Disfruta de sabores únicos, combinaciones increíbles y promociones especiales todo el año. ¡Dulces momentos te esperan!</p>
+        <a href="#" class="btn order-btn">
+            <i class="fas fa-bolt me-2"></i>Ordenar ahora
+        </a>
+    </div>
+</div>
+
+<!-- CATEGORÍAS -->
+<div class="container mt-5 pt-5">
+    <h2 class="section-title">Nuestras Categorías</h2>
+
+    <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+            <div class="cat-card">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" class="cat-img w-100" alt="Helados">
+                <div class="cat-content">
+                    <h4 class="cat-title">Helados Artesanales</h4>
+                    <p class="cat-desc">Más de 50 sabores creados con ingredientes naturales. Desde clásicos hasta combinaciones exclusivas.</p>
+                    <a href="#" class="btn cat-btn">Ver sabores <i class="fas fa-arrow-right ms-1"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+            <div class="cat-card">
+                <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w-800&q=80" class="cat-img w-100" alt="Bebidas">
+                <div class="cat-content">
+                    <h4 class="cat-title">Bebidas Refrescantes</h4>
+                    <p class="cat-desc">Batidos, smoothies, malteadas y bebidas frías para acompañar tus momentos dulces.</p>
+                    <a href="#" class="btn cat-btn">Ver bebidas <i class="fas fa-arrow-right ms-1"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+            <div class="cat-card">
+                <img src="https://images.unsplash.com/photo-1559620192-032c64bc86af?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" class="cat-img w-100" alt="Snacks">
+                <div class="cat-content">
+                    <h4 class="cat-title">Snacks Deliciosos</h4>
+                    <p class="cat-desc">Galletas, brownies, churros y otros acompañamientos perfectos para tu helado favorito.</p>
+                    <a href="#" class="btn cat-btn">Ver snacks <i class="fas fa-arrow-right ms-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PROMOCIONES -->
+<div class="container mt-5 pt-5">
+    <h2 class="section-title">Promociones Especiales</h2>
+
+    <div class="promo">
+        <h3 class="promo-title">🔥 COMBO DEL DÍA 🔥</h3>
+        <p class="lead">Helado artesanal (2 bolas) + Snack a elección + Bebida refrescante</p>
+        <div class="promo-price">$4.99</div>
+        <p class="mb-4"><s>Precio regular: $7.99</s> <span class="badge bg-primary ms-2">Ahorra 38%</span></p>
+        <a href="#" class="btn promo-btn">
+            <i class="fas fa-fire me-2"></i>Obtener promoción
+        </a>
+        <p class="mt-3 small">Válido solo por hoy | Máximo 2 combos por persona</p>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="footer-logo">Cuvipop</div>
+                <p>Dulces momentos desde 2020. Creando sonrisas con cada bocado.</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/cuvipop_sv/" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/Cuvipop/" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="col-lg-2 col-md-6 mb-4">
+                <div class="footer-links">
+                    <h5>Productos</h5>
+                    <ul>
+                        <li><a href="#">Helados</a></li>
+                        <li><a href="#">Bebidas</a></li>
+                        <li><a href="#">Snacks</a></li>
+                        <li><a href="#">Combos</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-lg-2 col-md-6 mb-4">
+                <div class="footer-links">
+                    <h5>Empresa</h5>
+                    <ul>
+                        <li><a href="#">Sobre nosotros</a></li>
+                        <li><a href="#">Nuestra historia</a></li>
+                        <li><a href="#">Tiendas</a></li>
+                        <li><a href="#">Trabaja con nosotros</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 mb-4">
+                <div class="footer-links">
+                    <h5>Contacto</h5>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> Av. Principal 123, Ciudad</li>
+                        <li><i class="fas fa-phone me-2"></i> (123) 456-7890</li>
+                        <li><i class="fas fa-envelope me-2"></i> hola@cuvipop.com</li>
+                        <li><i class="fas fa-clock me-2"></i> Abierto todos los días 10am-10pm</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>Cuvipop © 2025 — Todos los derechos reservados | Diseñado con ❤️ para los amantes del dulce</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/cart-indicator.js"></script>
+<script>
+    // Animación simple para las cards al aparecer en pantalla
+    document.addEventListener('DOMContentLoaded', function() {
+        const catCards = document.querySelectorAll('.cat-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        catCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s, transform 0.5s';
+            observer.observe(card);
+        });
+        
+        // Efecto para botones de acción
+        const actionButtons = document.querySelectorAll('.order-btn, .promo-btn, .cart-btn');
+        actionButtons.forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px)';
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    });
+</script>
+</body>
+</html>
+</body>
+</html>
